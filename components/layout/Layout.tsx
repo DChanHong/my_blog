@@ -66,9 +66,9 @@ const Layout = ({ children }: Wrapper) => {
 
       <footer className={`border-2 bg-[#F9F9F9] h-[200px]`}>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>11</li>
+          <li>22</li>
+          <li>33</li>
         </ul>
       </footer>
 
