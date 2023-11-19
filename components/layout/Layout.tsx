@@ -6,6 +6,7 @@ import { BiSolidUser } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 
 interface Wrapper {
   children: React.ReactNode;
@@ -18,66 +19,36 @@ const Layout = ({ children }: Wrapper) => {
   return (
     <>
       <header
-        className={`fixed border-b-2 h-[100px] top-0 w-full z-9 bg-white flex items-center`}
+        className={`fixed h-[100px] top-0 w-full z-9 bg-black text-white flex items-center sm:justify-normal	justify-between	`}
       >
         <h1 className={`font-bold text-[1.5em] mx-8`}>
           <Link href={"/"}>Hong Engineering</Link>
         </h1>
-        <ul className="hidden sm:flex">
-          <li className={`font-semibold text-[1.4em] mx-4`}>
+        <ul className=" flex">
+          <li className={`hidden sm:block font-semibold text-[1.4em] mx-4`}>
             <Link href={"/blog"}>
-              <span className={`underline_on_hover`}>Blog</span>
+              <span>Blog</span>
             </Link>
           </li>
-          <li className={`font-semibold text-[1.4em] mx-4`}>
+          <li className={`hidden sm:block font-semibold text-[1.4em] mx-4`}>
             <Link href={"/career"}>
-              <span className={`underline_on_hover`}>Career</span>
+              <span>Career</span>
             </Link>
+          </li>
+          <li className={`block sm:hidden font-semibold text-[1.4em] mx-4`}>
+            <button
+              onClick={() => setSideNavBar(!sideNavBar)}
+              type="button"
+              className="w-[2rem]"
+            >
+              <GiHamburgerMenu className="underline_on_hover" />
+            </button>
           </li>
         </ul>
       </header>
 
-      <div className={`left-0 fixed min-h-[100%] h-[100%] sm:hidden`}>
-        <button
-          type="button"
-          onClick={() => setSideNavBar(!sideNavBar)}
-          className="flex flex-col items-center px-6 py-2 mt-4 mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
-        >
-          <p className="w-[2rem] py-3">
-            <GiHamburgerMenu className="w-full h-full" />
-          </p>
-        </button>
-        <Link
-          className="flex flex-col items-center px-6 py-2  mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
-          href={"/"}
-        >
-          <p className="w-[2rem]">
-            <BiSolidUser className="w-full h-full" />
-          </p>
-          <p className="text-[1rem] text-center">Me</p>
-        </Link>
-        <Link
-          className="flex flex-col items-center px-6 py-2 mt-4 mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
-          href={"/"}
-        >
-          <p className="w-[2rem]">
-            <AiFillHome className="w-full h-full" />
-          </p>
-          <p className="text-[1rem] text-center">홈</p>
-        </Link>
-        <Link
-          className="flex flex-col items-center px-6 py-2 mt-4 mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
-          href={"/"}
-        >
-          <p className="w-[2rem]">
-            <BsBook className="w-full h-full" />
-          </p>
-          <p className="text-[1rem] text-center">Blog</p>
-        </Link>
-      </div>
-
       <nav
-        className={`block w-[14rem] fixed border-2 bg-white top-0 left-0 min-h-[100%] h-[100%] sm:hidden ${
+        className={`block w-full fixed border-2 bg-white top-0 min-h-[100%] h-[100%] sm:hidden ${
           sideNavBar ? "nav_open" : "nav_closed"
         }`}
       >
@@ -90,18 +61,17 @@ const Layout = ({ children }: Wrapper) => {
             <IoClose className="w-full h-full" />
           </button>
         </p>
+        <div className="flex border-2 mb-6 rounded-xl p-1 justify-between m-4">
+          <input
+            className="mx-2 p-1 outline-none	"
+            type="text"
+            placeholder="Search for Keyword"
+          />
+          <button type="button">
+            <IoSearch size={30} />
+          </button>
+        </div>
         <ul>
-          <li>
-            <Link
-              className="flex items-center px-6 py-2  mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
-              href={"/"}
-            >
-              <p className="w-[2rem] mr-4">
-                <BiSolidUser className="w-full h-full" />
-              </p>
-              <p className="text-[1rem] text-center">Me</p>
-            </Link>
-          </li>
           <li>
             <Link
               className="flex items-center px-6 py-2 mt-4 mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
@@ -110,13 +80,25 @@ const Layout = ({ children }: Wrapper) => {
               <p className="w-[2rem] mr-4">
                 <AiFillHome className="w-full h-full" />
               </p>
-              <p className="text-[1rem] text-center">홈</p>
+              <p className="text-[1rem] text-center">Home</p>
             </Link>
           </li>
           <li>
             <Link
+              className="flex items-center px-6 py-2 mt-4  mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
+              href={"/career"}
+            >
+              <p className="w-[2rem] mr-4">
+                <BiSolidUser className="w-full h-full" />
+              </p>
+              <p className="text-[1rem] text-center">Career</p>
+            </Link>
+          </li>
+
+          <li>
+            <Link
               className="flex items-center px-6 py-2 mt-4 mx-1 hover:bg-[#EFEFEF] hover:rounded-xl"
-              href={"/"}
+              href={"/blog"}
             >
               <p className="w-[2rem] mr-4">
                 <BsBook className="w-full h-full" />
@@ -155,6 +137,8 @@ const Layout = ({ children }: Wrapper) => {
             text-decoration: none;
             cursor: pointer;
             color: inherit;
+            width: 100%;
+            height: 100%;
           }
           .underline_on_hover::before {
             content: "";
@@ -163,7 +147,7 @@ const Layout = ({ children }: Wrapper) => {
             height: 3px;
             bottom: -7px;
             left: 0;
-            background-color: #000;
+            background-color: #fff;
             transition: width 0.3s ease-in-out;
           }
           .underline_on_hover:hover::before {
@@ -171,11 +155,11 @@ const Layout = ({ children }: Wrapper) => {
             transition: width 0.2s ease-in-out;
           }
           .nav_open {
-            transform: translateX(0);
+            transform: translateY(0);
             transition: transform 0.3s ease-in-out;
           }
           .nav_closed {
-            transform: translateX(-100%);
+            transform: translateY(-100%);
             transition: transform 0.3s ease-in-out;
           }
         `}
