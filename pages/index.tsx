@@ -7,14 +7,22 @@ import { SiMysql } from "react-icons/si";
 import { SiTypescript } from "react-icons/si";
 import { IoLogoJavascript } from "react-icons/io5";
 
+import axios from "axios";
+
 export default function Home() {
+  const test = async () => {
+    const result = await axios.get("http://localhost:3000/api/blog/list");
+  };
+
   return (
     <Layout>
       <section className=" w-full h-full m-auto">
         <div className="flex items-center justify-center font-bold text-center text-[2.5em] bg-[#010118] h-60">
           <p className="text-white">Hong's Developer</p>
         </div>
-
+        <div>
+          <button onClick={test}>test</button>
+        </div>
         <div className="w-8/12 m-auto">
           <h3 className="font-bold text-[2.5em] mt-20">Me</h3>
           <div className="my-2 py-4">
